@@ -1,0 +1,181 @@
+/* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+body {
+    background-color: #f8f8f8;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Header & Nav */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 50px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.logo {
+    font-size: 1.8em;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #333;
+    margin-left: 25px;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #007bff; /* A nice blue highlight */
+}
+
+/* Hero Section */
+.hero {
+    min-height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: url('images/hero-bg.jpg') center/cover no-repeat; /* CHANGE THIS IMAGE */
+    color: white;
+    position: relative;
+    z-index: 1;
+}
+
+.hero::after { /* Overlay for text visibility */
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: -1;
+}
+
+.hero h1 {
+    font-size: 3em;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    font-size: 1.2em;
+    margin-bottom: 30px;
+}
+
+#view-work-btn {
+    padding: 10px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s;
+}
+
+#view-work-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Gallery Section (The Grid Magic) */
+.gallery {
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.gallery h2 {
+    margin-bottom: 40px;
+    font-size: 2.5em;
+}
+
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.photo-item {
+    overflow: hidden;
+    position: relative;
+}
+
+.photo-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    /* --- ANIMATION START: HOVER EFFECT --- */
+    transition: transform 0.5s ease-in-out;
+}
+
+.photo-item img:hover {
+    transform: scale(1.05); /* Subtle zoom on hover */
+    opacity: 0.8;
+}
+
+/* --- ANIMATION START: FADE-IN ON SCROLL (for JS) --- */
+.photo-item.hidden {
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+.photo-item.visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1s ease-out, transform 0.8s ease-out;
+}
+/* --- ANIMATION END --- */
+
+
+/* Other Sections (Services, Contact) */
+#services, #contact {
+    padding: 50px 50px;
+    max-width: 800px;
+    margin: 40px auto;
+}
+
+#contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+#contact input, #contact textarea, #contact button {
+    padding: 12px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+#contact button {
+    background-color: #333;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#contact button:hover {
+    background-color: #555;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    margin-top: 50px;
+}
+
+/* Add media queries for mobile responsiveness here! */
