@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krish | Freelance Photographer Portfolio</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-color: #333333;
+            --accent-color: #007bff;
+            --light-bg: #f5f5f5;
+            --dark-bg: #222222;
+        }
+
+        * { margin:0; padding:0; box-sizing:border-box; }
+
+        body {
+            font-family: 'Montserrat', Arial, sans-serif;
+            background-color: #fff;
+            color: var(--primary-color);
+            line-height: 1.6;
+        }
+
+        h1,h2,h3 { font-weight:700; margin-bottom:0.5em; }
+
+        section { padding:80px 5%; }
+
+        header {
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            padding:20px 5%;
+            background-color:#fff;
+            box-shadow:0 1px 10px rgba(0,0,0,0.05);
+            position:sticky;
+            top:0;
+            z-index:1000;
+        }
+
+        .logo { font-size:1.8em; font-weight:bold; letter-spacing:2px; }
+        .tagline { font-size:0.5em; font-weight:400; color:#999; margin-left:5px; }
+        nav a {
+            text-decoration:none;
+            color:var(--primary-color);
+            margin-left:25px;
+            font-size:0.9em;
+            transition: color 0.3s, border-bottom 0.3s;
+        }
+        nav a:hover { color:var(--accent-color); border-bottom:2px solid var(--accent-color); }
+
+        /* Hero Section with Profile Photo */
+        .hero {
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            text-align:left;
+            position:relative;
+            background: url('images/hero-bg.jpg') center/cover no-repeat;
+        }
+        .hero::after {
+            content:'';
+            position:absolute; top:0; left:0; right:0; bottom:0;
+            background: rgba(0,0,0,0.55); z-index:1;
+        }
+        .hero-content-wrapper {
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            gap:50px;
+            position:relative;
+            z-index:2;
+            color:white;
+            max-width:1200px;
+            width:100%;
+        }
+        .hero-profile { flex-shrink:0; }
+        .hero-profile img {
+            width:200px; height:200px;
+            border-radius:50%;
+            border:4px solid white;
+            object-fit:cover;
+            animation: fadeInScale 1.5s ease-out;
+        }
+        .hero-text { max-width:600px; animation: fadeInScale 1.5s ease-out; }
+        .hero-text h1 { font-size:3.5em; margin-bottom:15px; text-shadow:0 2px 4px rgba(0,0,0,0.5); }
+        .hero-text p { font-size:1.3em; margin-bottom:40px; font-weight:400; }
+
+        .cta-button {
+            padding:12px 35px;
+            background-color: var(--accent-color);
+            color:white;
+            border:2px solid var(--accent-color);
+            cursor:pointer;
+            font-size:1.1em;
+            text-transform:uppercase;
+            letter-spacing:1px;
+            transition: background-color 0.4s, transform 0.2s;
+        }
+        .cta-button:hover {
+            background-color:transparent;
+            border-color:white;
+            transform:translateY(-2px);
+        }
+
+        @keyframes fadeInScale { from {opacity:0; transform:scale(0.9);} to {opacity:1; transform:scale(1);} }
+
+        /* Gallery */
+        .gallery { background-color: var(--light-bg); text-align:center; }
+        .gallery h2 { font-size:3em; margin-bottom:50px; }
+        .photo-grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(320px,1fr)); gap:20px; max-width:1400px; margin:0 auto; }
+        .photo-item { overflow:hidden; position:relative; box-shadow:0 4px 10px rgba(0,0,0,0.1); }
+        .photo-item img { width:100%; height:100%; display:block; object-fit:cover; transition:transform 0.6s ease-out, opacity 0.4s; }
+        .photo-item img:hover { transform:scale(1.08) rotate(1deg); opacity:0.9; }
+        .photo-item.hidden { opacity:0; transform:translateY(40px); }
+        .photo-item.visible { opacity:1; transform:translateY(0); transition:opacity 1s ease-out, transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94); }
+
+        /* Services */
+        .services { text-align:center; background-color:#fff; }
+        .services-list { display:flex; gap:30px; margin-top:50px; justify-content:center; }
+        .service-card { flex:1; max-width:350px; padding:30px; background:var(--light-bg); border-radius:8px; text-align:left; transition: box-shadow 0.3s, transform 0.3s; }
+        .service-card:hover { box-shadow:0 10px 20px rgba(0,123,255,0.15); transform:translateY(-5px); }
+        .service-card h3 { color:var(--accent-color); font-size:1.5em; border-bottom:2px solid var(--accent-color); padding-bottom:10px; margin-bottom:15px; }
+
+        /* Contact */
+        .contact { background-color: var(--dark-bg); color:white; text-align:center; }
+        .contact h2 { color:white; }
+        #contact-form { display:flex; flex-direction:column; gap:20px; max-width:600px; margin:40px auto 0; text-align:left; }
+        #contact-form input, #contact-form textarea { padding:15px; border:1px solid #444; background-color:#333; color:white; border-radius:4px; font-size:1em; }
+        #contact-form textarea { resize:vertical; }
+        #contact-form .cta-button { background-color:white; color:var(--primary-color); border-color:white; }
+        #contact-form .cta-button:hover { background-color: var(--accent-color); color:white; border-color: var(--accent-color); }
+
+        /* Footer */
+        footer { text-align:center; padding:20px; background-color:#111; color:#ccc; font-size:0.8em; }
+
+        /* Mobile */
+        @media (max-width:768px){
+            header{ flex-direction:column; padding:15px; }
+            nav{ margin-top:10px; }
+            nav a{ margin:0 10px; }
+            .hero-content-wrapper{ flex-direction:column; text-align:center; }
+            .hero-profile img{ width:150px; height:150px; margin-bottom:20px; }
+            .hero-text h1{ font-size:2.5em; }
+            .hero-text p{ font-size:1em; }
+            .photo-grid{ grid-template-columns:1fr; }
+            .services-list{ flex-direction:column; }
+            .service-card{ max-width:100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">KRISH <span class="tagline">Photography</span></div>
+        <nav>
+            <a href="#home">Home</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#services">Services</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content-wrapper">
+            <div class="hero-profile">
+                <img src="capyure.jpeg" alt="Krish Profile Photo">
+            </div>
+            <div class="hero-text">
+                <h1>Capturing Moments, Creating Art.</h1>
+                <p>Freelance Photographer based in London. Specializing in stunning <strong>Portrait</strong> and cinematic <strong>Landscape</strong> photography.</p>
+                <button id="view-work-btn" class="cta-button">View My Work</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <h2>The Portfolio</h2>
+        <div class="photo-grid">
+            <div class="photo-item" data-category="portrait"><img src="zohre-nemati-DlCjD1RdQnE-unsplash.webp" alt="Emotional Portrait Shot 1"></div>
+            <div class="photo-item" data-category="landscape"><img src="breathtaking-summer-day-wild-mountains-600nw-2499073105.webp" alt="Mountain Landscape Scenic"></div>
+            <div class="photo-item" data-category="wedding"><img src="Fascinating-Engagement-Couple-Poses.jpg" alt="Wedding Couple Close-up"></div>
+            <div class="photo-item" data-category="portrait"><img src="free-photo-of-fashion-editorial-portrait.jpeg" alt="Fashion Headshot"></div>
+            <div class="photo-item" data-category="landscape"><img src="high-angle-beautiful-buildings-nighttime_23-2149444909.avif" alt="Cityscape at Night"></div>
+            <div class="photo-item" data-category="wedding"><img src="candid.webp" alt="candid"></div>
+            <div class="photo-item" data-category="portrait"><img src="images.jpeg" alt="Creative Studio Portrait"></div>
+            <div class="photo-item" data-category="landscape"><img src="frost.jpg" alt="Forest Path with Mist"></div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <h2>What I Offer</h2>
+        <div class="services-list">
+            <div class="service-card">
+                <h3>Portrait Sessions</h3>
+                <p>High-end headshots, corporate portraits, and creative personal branding photoshoots. Includes digital retouching.</p>
+            </div>
+            <div class="service-card">
+                <h3>Event & Wedding</h3>
+                <p>Full-day coverage for weddings, corporate events, and parties. Telling the complete story of your special day.</p>
+            </div>
+            <div class="service-card">
+                <h3>Fine Art Prints</h3>
+                <p>Limited edition, signed prints of select landscape and abstract work, available on museum-quality paper.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2>Let's Create Together</h2>
+        <p>Ready to discuss your project? I aim to respond to all inquiries within 24 hours.</p>
+        <p>Email me at <a href="mailto:krishkasun@gmail.com" style="color: var(--accent-color); text-decoration: underline;">krishkasun@gmail.com</a></p>
+        <form id="contact-form">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" rows="5" placeholder="Tell me about your photography needs..." required></textarea>
+            <button type="submit" class="cta-button">Send Message</button>
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Krish Photography. Built with HTML, CSS, & JS. | London, UK</p>
+        <p>Contact: <a href="mailto:krishkasun@gmail.com" style="color: var(--accent-color); text-decoration: underline;">krishkasun@gmail.com</a></p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const smoothScroll = (targetId) => {
+                const target = document.getElementById(targetId);
+                if(target){ target.scrollIntoView({behavior:'smooth'}); }
+            };
+
+            document.querySelectorAll('nav a').forEach(a=>{
+                a.addEventListener('click', function(e){ e.preventDefault(); smoothScroll(this.getAttribute('href').substring(1)); });
+            });
+
+            const viewWorkBtn = document.getElementById('view-work-btn');
+            if(viewWorkBtn){ viewWorkBtn.addEventListener('click', ()=>smoothScroll('gallery')); }
+
+            const photoItems = document.querySelectorAll('.photo-item');
+            photoItems.forEach(item=>item.classList.add('hidden'));
+            const observer = new IntersectionObserver((entries,observer)=>{
+                entries.forEach(entry=>{
+                    if(entry.isIntersecting){
+                        entry.target.classList.remove('hidden'); entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold:0.2 });
+            photoItems.forEach(item=>observer.observe(item));
+
+            const contactForm = document.getElementById('contact-form');
+            if(contactForm){
+                contactForm.addEventListener('submit', function(e){
+                    e.preventDefault();
+                    alert('Thank you for your message, Krish will be in touch soon!');
+                    contactForm.reset();
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
